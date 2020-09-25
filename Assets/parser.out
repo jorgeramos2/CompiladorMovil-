@@ -1,0 +1,1303 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> PROGRAMA
+Rule 1     PROGRAMA -> PROGRAM ID SEMICOLON PROGRAMA2 BLOQUE
+Rule 2     PROGRAMA2 -> VARS
+Rule 3     PROGRAMA2 -> VACIO
+Rule 4     VARS -> VAR VARS2
+Rule 5     VARS2 -> VARS3 COLON TIPO SEMICOLON
+Rule 6     VARS3 -> ID
+Rule 7     VARS3 -> ID COMMA VARS2
+Rule 8     TIPO -> INT
+Rule 9     TIPO -> FLOAT
+Rule 10    BLOQUE -> BRACKETIZQ ESTATUTO BRACKETDER
+Rule 11    ESTATUTO -> ESTATUTO2 ESTATUTO
+Rule 12    ESTATUTO -> VACIO
+Rule 13    ESTATUTO2 -> ASIGNACION
+Rule 14    ESTATUTO2 -> CONDICION
+Rule 15    ESTATUTO2 -> ESCRITURA
+Rule 16    ASIGNACION -> ID IGUAL EXPRESION SEMICOLON
+Rule 17    ESCRITURA -> PRINT PARENIZQ ESCRITURA2 ESCRITURA3 PARENDER SEMICOLON
+Rule 18    ESCRITURA2 -> EXPRESION
+Rule 19    ESCRITURA2 -> CTESTRING
+Rule 20    ESCRITURA3 -> COMMA ESCRITURA2 ESCRITURA3
+Rule 21    ESCRITURA3 -> VACIO
+Rule 22    EXPRESION -> EXP EXPRESION2
+Rule 23    EXPRESION2 -> MASQUE EXP
+Rule 24    EXPRESION2 -> MENOSQUE EXP
+Rule 25    EXPRESION2 -> NOIGUAL EXP
+Rule 26    EXPRESION2 -> VACIO
+Rule 27    CONDICION -> IF PARENIZQ EXPRESION PARENDER BLOQUE CONDICION2 SEMICOLON
+Rule 28    CONDICION2 -> ELSE BLOQUE
+Rule 29    CONDICION2 -> VACIO
+Rule 30    EXP -> TERMINO EXP2
+Rule 31    EXP2 -> SIMMAS TERMINO EXP2
+Rule 32    EXP2 -> SIMMENOS TERMINO EXP2
+Rule 33    EXP2 -> VACIO
+Rule 34    TERMINO -> FACTOR TERMINO2
+Rule 35    TERMINO2 -> SIMMULT FACTOR TERMINO2
+Rule 36    TERMINO2 -> SIMDIV FACTOR TERMINO2
+Rule 37    TERMINO2 -> VACIO
+Rule 38    FACTOR -> PARENIZQ EXPRESION PARENDER
+Rule 39    FACTOR -> FACTOR2 VARCTE
+Rule 40    FACTOR2 -> SIMMAS
+Rule 41    FACTOR2 -> SIMMENOS
+Rule 42    FACTOR2 -> VACIO
+Rule 43    VARCTE -> ID
+Rule 44    VARCTE -> CTEI
+Rule 45    VARCTE -> CTEF
+Rule 46    VACIO -> <empty>
+
+Terminals, with rules where they appear
+
+BRACKETDER           : 10
+BRACKETIZQ           : 10
+COLON                : 5
+COMMA                : 7 20
+CTEF                 : 45
+CTEI                 : 44
+CTESTRING            : 19
+ELSE                 : 28
+FLOAT                : 9
+ID                   : 1 6 7 16 43
+IF                   : 27
+IGUAL                : 16
+INT                  : 8
+MASQUE               : 23
+MENOSQUE             : 24
+NOIGUAL              : 25
+PARENDER             : 17 27 38
+PARENIZQ             : 17 27 38
+PRINT                : 17
+PROGRAM              : 1
+SEMICOLON            : 1 5 16 17 27
+SIMDIV               : 36
+SIMMAS               : 31 40
+SIMMENOS             : 32 41
+SIMMULT              : 35
+VAR                  : 4
+error                : 
+
+Nonterminals, with rules where they appear
+
+ASIGNACION           : 13
+BLOQUE               : 1 27 28
+CONDICION            : 14
+CONDICION2           : 27
+ESCRITURA            : 15
+ESCRITURA2           : 17 20
+ESCRITURA3           : 17 20
+ESTATUTO             : 10 11
+ESTATUTO2            : 11
+EXP                  : 22 23 24 25
+EXP2                 : 30 31 32
+EXPRESION            : 16 18 27 38
+EXPRESION2           : 22
+FACTOR               : 34 35 36
+FACTOR2              : 39
+PROGRAMA             : 0
+PROGRAMA2            : 1
+TERMINO              : 30 31 32
+TERMINO2             : 34 35 36
+TIPO                 : 5
+VACIO                : 3 12 21 26 29 33 37 42
+VARCTE               : 39
+VARS                 : 2
+VARS2                : 4 7
+VARS3                : 5
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . PROGRAMA
+    (1) PROGRAMA -> . PROGRAM ID SEMICOLON PROGRAMA2 BLOQUE
+
+    PROGRAM         shift and go to state 2
+
+    PROGRAMA                       shift and go to state 1
+
+state 1
+
+    (0) S' -> PROGRAMA .
+
+
+
+state 2
+
+    (1) PROGRAMA -> PROGRAM . ID SEMICOLON PROGRAMA2 BLOQUE
+
+    ID              shift and go to state 3
+
+
+state 3
+
+    (1) PROGRAMA -> PROGRAM ID . SEMICOLON PROGRAMA2 BLOQUE
+
+    SEMICOLON       shift and go to state 4
+
+
+state 4
+
+    (1) PROGRAMA -> PROGRAM ID SEMICOLON . PROGRAMA2 BLOQUE
+    (2) PROGRAMA2 -> . VARS
+    (3) PROGRAMA2 -> . VACIO
+    (4) VARS -> . VAR VARS2
+    (46) VACIO -> .
+
+    VAR             shift and go to state 8
+    BRACKETIZQ      reduce using rule 46 (VACIO -> .)
+
+    PROGRAMA2                      shift and go to state 5
+    VARS                           shift and go to state 6
+    VACIO                          shift and go to state 7
+
+state 5
+
+    (1) PROGRAMA -> PROGRAM ID SEMICOLON PROGRAMA2 . BLOQUE
+    (10) BLOQUE -> . BRACKETIZQ ESTATUTO BRACKETDER
+
+    BRACKETIZQ      shift and go to state 10
+
+    BLOQUE                         shift and go to state 9
+
+state 6
+
+    (2) PROGRAMA2 -> VARS .
+
+    BRACKETIZQ      reduce using rule 2 (PROGRAMA2 -> VARS .)
+
+
+state 7
+
+    (3) PROGRAMA2 -> VACIO .
+
+    BRACKETIZQ      reduce using rule 3 (PROGRAMA2 -> VACIO .)
+
+
+state 8
+
+    (4) VARS -> VAR . VARS2
+    (5) VARS2 -> . VARS3 COLON TIPO SEMICOLON
+    (6) VARS3 -> . ID
+    (7) VARS3 -> . ID COMMA VARS2
+
+    ID              shift and go to state 13
+
+    VARS2                          shift and go to state 11
+    VARS3                          shift and go to state 12
+
+state 9
+
+    (1) PROGRAMA -> PROGRAM ID SEMICOLON PROGRAMA2 BLOQUE .
+
+    $end            reduce using rule 1 (PROGRAMA -> PROGRAM ID SEMICOLON PROGRAMA2 BLOQUE .)
+
+
+state 10
+
+    (10) BLOQUE -> BRACKETIZQ . ESTATUTO BRACKETDER
+    (11) ESTATUTO -> . ESTATUTO2 ESTATUTO
+    (12) ESTATUTO -> . VACIO
+    (13) ESTATUTO2 -> . ASIGNACION
+    (14) ESTATUTO2 -> . CONDICION
+    (15) ESTATUTO2 -> . ESCRITURA
+    (46) VACIO -> .
+    (16) ASIGNACION -> . ID IGUAL EXPRESION SEMICOLON
+    (27) CONDICION -> . IF PARENIZQ EXPRESION PARENDER BLOQUE CONDICION2 SEMICOLON
+    (17) ESCRITURA -> . PRINT PARENIZQ ESCRITURA2 ESCRITURA3 PARENDER SEMICOLON
+
+    BRACKETDER      reduce using rule 46 (VACIO -> .)
+    ID              shift and go to state 20
+    IF              shift and go to state 21
+    PRINT           shift and go to state 22
+
+    ESTATUTO                       shift and go to state 14
+    ESTATUTO2                      shift and go to state 15
+    VACIO                          shift and go to state 16
+    ASIGNACION                     shift and go to state 17
+    CONDICION                      shift and go to state 18
+    ESCRITURA                      shift and go to state 19
+
+state 11
+
+    (4) VARS -> VAR VARS2 .
+
+    BRACKETIZQ      reduce using rule 4 (VARS -> VAR VARS2 .)
+
+
+state 12
+
+    (5) VARS2 -> VARS3 . COLON TIPO SEMICOLON
+
+    COLON           shift and go to state 23
+
+
+state 13
+
+    (6) VARS3 -> ID .
+    (7) VARS3 -> ID . COMMA VARS2
+
+    COLON           reduce using rule 6 (VARS3 -> ID .)
+    COMMA           shift and go to state 24
+
+
+state 14
+
+    (10) BLOQUE -> BRACKETIZQ ESTATUTO . BRACKETDER
+
+    BRACKETDER      shift and go to state 25
+
+
+state 15
+
+    (11) ESTATUTO -> ESTATUTO2 . ESTATUTO
+    (11) ESTATUTO -> . ESTATUTO2 ESTATUTO
+    (12) ESTATUTO -> . VACIO
+    (13) ESTATUTO2 -> . ASIGNACION
+    (14) ESTATUTO2 -> . CONDICION
+    (15) ESTATUTO2 -> . ESCRITURA
+    (46) VACIO -> .
+    (16) ASIGNACION -> . ID IGUAL EXPRESION SEMICOLON
+    (27) CONDICION -> . IF PARENIZQ EXPRESION PARENDER BLOQUE CONDICION2 SEMICOLON
+    (17) ESCRITURA -> . PRINT PARENIZQ ESCRITURA2 ESCRITURA3 PARENDER SEMICOLON
+
+    BRACKETDER      reduce using rule 46 (VACIO -> .)
+    ID              shift and go to state 20
+    IF              shift and go to state 21
+    PRINT           shift and go to state 22
+
+    ESTATUTO2                      shift and go to state 15
+    ESTATUTO                       shift and go to state 26
+    VACIO                          shift and go to state 16
+    ASIGNACION                     shift and go to state 17
+    CONDICION                      shift and go to state 18
+    ESCRITURA                      shift and go to state 19
+
+state 16
+
+    (12) ESTATUTO -> VACIO .
+
+    BRACKETDER      reduce using rule 12 (ESTATUTO -> VACIO .)
+
+
+state 17
+
+    (13) ESTATUTO2 -> ASIGNACION .
+
+    ID              reduce using rule 13 (ESTATUTO2 -> ASIGNACION .)
+    IF              reduce using rule 13 (ESTATUTO2 -> ASIGNACION .)
+    PRINT           reduce using rule 13 (ESTATUTO2 -> ASIGNACION .)
+    BRACKETDER      reduce using rule 13 (ESTATUTO2 -> ASIGNACION .)
+
+
+state 18
+
+    (14) ESTATUTO2 -> CONDICION .
+
+    ID              reduce using rule 14 (ESTATUTO2 -> CONDICION .)
+    IF              reduce using rule 14 (ESTATUTO2 -> CONDICION .)
+    PRINT           reduce using rule 14 (ESTATUTO2 -> CONDICION .)
+    BRACKETDER      reduce using rule 14 (ESTATUTO2 -> CONDICION .)
+
+
+state 19
+
+    (15) ESTATUTO2 -> ESCRITURA .
+
+    ID              reduce using rule 15 (ESTATUTO2 -> ESCRITURA .)
+    IF              reduce using rule 15 (ESTATUTO2 -> ESCRITURA .)
+    PRINT           reduce using rule 15 (ESTATUTO2 -> ESCRITURA .)
+    BRACKETDER      reduce using rule 15 (ESTATUTO2 -> ESCRITURA .)
+
+
+state 20
+
+    (16) ASIGNACION -> ID . IGUAL EXPRESION SEMICOLON
+
+    IGUAL           shift and go to state 27
+
+
+state 21
+
+    (27) CONDICION -> IF . PARENIZQ EXPRESION PARENDER BLOQUE CONDICION2 SEMICOLON
+
+    PARENIZQ        shift and go to state 28
+
+
+state 22
+
+    (17) ESCRITURA -> PRINT . PARENIZQ ESCRITURA2 ESCRITURA3 PARENDER SEMICOLON
+
+    PARENIZQ        shift and go to state 29
+
+
+state 23
+
+    (5) VARS2 -> VARS3 COLON . TIPO SEMICOLON
+    (8) TIPO -> . INT
+    (9) TIPO -> . FLOAT
+
+    INT             shift and go to state 31
+    FLOAT           shift and go to state 32
+
+    TIPO                           shift and go to state 30
+
+state 24
+
+    (7) VARS3 -> ID COMMA . VARS2
+    (5) VARS2 -> . VARS3 COLON TIPO SEMICOLON
+    (6) VARS3 -> . ID
+    (7) VARS3 -> . ID COMMA VARS2
+
+    ID              shift and go to state 13
+
+    VARS2                          shift and go to state 33
+    VARS3                          shift and go to state 12
+
+state 25
+
+    (10) BLOQUE -> BRACKETIZQ ESTATUTO BRACKETDER .
+
+    $end            reduce using rule 10 (BLOQUE -> BRACKETIZQ ESTATUTO BRACKETDER .)
+    ELSE            reduce using rule 10 (BLOQUE -> BRACKETIZQ ESTATUTO BRACKETDER .)
+    SEMICOLON       reduce using rule 10 (BLOQUE -> BRACKETIZQ ESTATUTO BRACKETDER .)
+
+
+state 26
+
+    (11) ESTATUTO -> ESTATUTO2 ESTATUTO .
+
+    BRACKETDER      reduce using rule 11 (ESTATUTO -> ESTATUTO2 ESTATUTO .)
+
+
+state 27
+
+    (16) ASIGNACION -> ID IGUAL . EXPRESION SEMICOLON
+    (22) EXPRESION -> . EXP EXPRESION2
+    (30) EXP -> . TERMINO EXP2
+    (34) TERMINO -> . FACTOR TERMINO2
+    (38) FACTOR -> . PARENIZQ EXPRESION PARENDER
+    (39) FACTOR -> . FACTOR2 VARCTE
+    (40) FACTOR2 -> . SIMMAS
+    (41) FACTOR2 -> . SIMMENOS
+    (42) FACTOR2 -> . VACIO
+    (46) VACIO -> .
+
+    PARENIZQ        shift and go to state 38
+    SIMMAS          shift and go to state 40
+    SIMMENOS        shift and go to state 41
+    ID              reduce using rule 46 (VACIO -> .)
+    CTEI            reduce using rule 46 (VACIO -> .)
+    CTEF            reduce using rule 46 (VACIO -> .)
+
+    EXPRESION                      shift and go to state 34
+    EXP                            shift and go to state 35
+    TERMINO                        shift and go to state 36
+    FACTOR                         shift and go to state 37
+    FACTOR2                        shift and go to state 39
+    VACIO                          shift and go to state 42
+
+state 28
+
+    (27) CONDICION -> IF PARENIZQ . EXPRESION PARENDER BLOQUE CONDICION2 SEMICOLON
+    (22) EXPRESION -> . EXP EXPRESION2
+    (30) EXP -> . TERMINO EXP2
+    (34) TERMINO -> . FACTOR TERMINO2
+    (38) FACTOR -> . PARENIZQ EXPRESION PARENDER
+    (39) FACTOR -> . FACTOR2 VARCTE
+    (40) FACTOR2 -> . SIMMAS
+    (41) FACTOR2 -> . SIMMENOS
+    (42) FACTOR2 -> . VACIO
+    (46) VACIO -> .
+
+    PARENIZQ        shift and go to state 38
+    SIMMAS          shift and go to state 40
+    SIMMENOS        shift and go to state 41
+    ID              reduce using rule 46 (VACIO -> .)
+    CTEI            reduce using rule 46 (VACIO -> .)
+    CTEF            reduce using rule 46 (VACIO -> .)
+
+    EXPRESION                      shift and go to state 43
+    EXP                            shift and go to state 35
+    TERMINO                        shift and go to state 36
+    FACTOR                         shift and go to state 37
+    FACTOR2                        shift and go to state 39
+    VACIO                          shift and go to state 42
+
+state 29
+
+    (17) ESCRITURA -> PRINT PARENIZQ . ESCRITURA2 ESCRITURA3 PARENDER SEMICOLON
+    (18) ESCRITURA2 -> . EXPRESION
+    (19) ESCRITURA2 -> . CTESTRING
+    (22) EXPRESION -> . EXP EXPRESION2
+    (30) EXP -> . TERMINO EXP2
+    (34) TERMINO -> . FACTOR TERMINO2
+    (38) FACTOR -> . PARENIZQ EXPRESION PARENDER
+    (39) FACTOR -> . FACTOR2 VARCTE
+    (40) FACTOR2 -> . SIMMAS
+    (41) FACTOR2 -> . SIMMENOS
+    (42) FACTOR2 -> . VACIO
+    (46) VACIO -> .
+
+    CTESTRING       shift and go to state 46
+    PARENIZQ        shift and go to state 38
+    SIMMAS          shift and go to state 40
+    SIMMENOS        shift and go to state 41
+    ID              reduce using rule 46 (VACIO -> .)
+    CTEI            reduce using rule 46 (VACIO -> .)
+    CTEF            reduce using rule 46 (VACIO -> .)
+
+    ESCRITURA2                     shift and go to state 44
+    EXPRESION                      shift and go to state 45
+    EXP                            shift and go to state 35
+    TERMINO                        shift and go to state 36
+    FACTOR                         shift and go to state 37
+    FACTOR2                        shift and go to state 39
+    VACIO                          shift and go to state 42
+
+state 30
+
+    (5) VARS2 -> VARS3 COLON TIPO . SEMICOLON
+
+    SEMICOLON       shift and go to state 47
+
+
+state 31
+
+    (8) TIPO -> INT .
+
+    SEMICOLON       reduce using rule 8 (TIPO -> INT .)
+
+
+state 32
+
+    (9) TIPO -> FLOAT .
+
+    SEMICOLON       reduce using rule 9 (TIPO -> FLOAT .)
+
+
+state 33
+
+    (7) VARS3 -> ID COMMA VARS2 .
+
+    COLON           reduce using rule 7 (VARS3 -> ID COMMA VARS2 .)
+
+
+state 34
+
+    (16) ASIGNACION -> ID IGUAL EXPRESION . SEMICOLON
+
+    SEMICOLON       shift and go to state 48
+
+
+state 35
+
+    (22) EXPRESION -> EXP . EXPRESION2
+    (23) EXPRESION2 -> . MASQUE EXP
+    (24) EXPRESION2 -> . MENOSQUE EXP
+    (25) EXPRESION2 -> . NOIGUAL EXP
+    (26) EXPRESION2 -> . VACIO
+    (46) VACIO -> .
+
+    MASQUE          shift and go to state 50
+    MENOSQUE        shift and go to state 51
+    NOIGUAL         shift and go to state 52
+    SEMICOLON       reduce using rule 46 (VACIO -> .)
+    PARENDER        reduce using rule 46 (VACIO -> .)
+    COMMA           reduce using rule 46 (VACIO -> .)
+
+    EXPRESION2                     shift and go to state 49
+    VACIO                          shift and go to state 53
+
+state 36
+
+    (30) EXP -> TERMINO . EXP2
+    (31) EXP2 -> . SIMMAS TERMINO EXP2
+    (32) EXP2 -> . SIMMENOS TERMINO EXP2
+    (33) EXP2 -> . VACIO
+    (46) VACIO -> .
+
+    SIMMAS          shift and go to state 55
+    SIMMENOS        shift and go to state 56
+    MASQUE          reduce using rule 46 (VACIO -> .)
+    MENOSQUE        reduce using rule 46 (VACIO -> .)
+    NOIGUAL         reduce using rule 46 (VACIO -> .)
+    SEMICOLON       reduce using rule 46 (VACIO -> .)
+    PARENDER        reduce using rule 46 (VACIO -> .)
+    COMMA           reduce using rule 46 (VACIO -> .)
+
+    EXP2                           shift and go to state 54
+    VACIO                          shift and go to state 57
+
+state 37
+
+    (34) TERMINO -> FACTOR . TERMINO2
+    (35) TERMINO2 -> . SIMMULT FACTOR TERMINO2
+    (36) TERMINO2 -> . SIMDIV FACTOR TERMINO2
+    (37) TERMINO2 -> . VACIO
+    (46) VACIO -> .
+
+    SIMMULT         shift and go to state 59
+    SIMDIV          shift and go to state 60
+    SIMMAS          reduce using rule 46 (VACIO -> .)
+    SIMMENOS        reduce using rule 46 (VACIO -> .)
+    MASQUE          reduce using rule 46 (VACIO -> .)
+    MENOSQUE        reduce using rule 46 (VACIO -> .)
+    NOIGUAL         reduce using rule 46 (VACIO -> .)
+    SEMICOLON       reduce using rule 46 (VACIO -> .)
+    PARENDER        reduce using rule 46 (VACIO -> .)
+    COMMA           reduce using rule 46 (VACIO -> .)
+
+    TERMINO2                       shift and go to state 58
+    VACIO                          shift and go to state 61
+
+state 38
+
+    (38) FACTOR -> PARENIZQ . EXPRESION PARENDER
+    (22) EXPRESION -> . EXP EXPRESION2
+    (30) EXP -> . TERMINO EXP2
+    (34) TERMINO -> . FACTOR TERMINO2
+    (38) FACTOR -> . PARENIZQ EXPRESION PARENDER
+    (39) FACTOR -> . FACTOR2 VARCTE
+    (40) FACTOR2 -> . SIMMAS
+    (41) FACTOR2 -> . SIMMENOS
+    (42) FACTOR2 -> . VACIO
+    (46) VACIO -> .
+
+    PARENIZQ        shift and go to state 38
+    SIMMAS          shift and go to state 40
+    SIMMENOS        shift and go to state 41
+    ID              reduce using rule 46 (VACIO -> .)
+    CTEI            reduce using rule 46 (VACIO -> .)
+    CTEF            reduce using rule 46 (VACIO -> .)
+
+    EXPRESION                      shift and go to state 62
+    EXP                            shift and go to state 35
+    TERMINO                        shift and go to state 36
+    FACTOR                         shift and go to state 37
+    FACTOR2                        shift and go to state 39
+    VACIO                          shift and go to state 42
+
+state 39
+
+    (39) FACTOR -> FACTOR2 . VARCTE
+    (43) VARCTE -> . ID
+    (44) VARCTE -> . CTEI
+    (45) VARCTE -> . CTEF
+
+    ID              shift and go to state 64
+    CTEI            shift and go to state 65
+    CTEF            shift and go to state 66
+
+    VARCTE                         shift and go to state 63
+
+state 40
+
+    (40) FACTOR2 -> SIMMAS .
+
+    ID              reduce using rule 40 (FACTOR2 -> SIMMAS .)
+    CTEI            reduce using rule 40 (FACTOR2 -> SIMMAS .)
+    CTEF            reduce using rule 40 (FACTOR2 -> SIMMAS .)
+
+
+state 41
+
+    (41) FACTOR2 -> SIMMENOS .
+
+    ID              reduce using rule 41 (FACTOR2 -> SIMMENOS .)
+    CTEI            reduce using rule 41 (FACTOR2 -> SIMMENOS .)
+    CTEF            reduce using rule 41 (FACTOR2 -> SIMMENOS .)
+
+
+state 42
+
+    (42) FACTOR2 -> VACIO .
+
+    ID              reduce using rule 42 (FACTOR2 -> VACIO .)
+    CTEI            reduce using rule 42 (FACTOR2 -> VACIO .)
+    CTEF            reduce using rule 42 (FACTOR2 -> VACIO .)
+
+
+state 43
+
+    (27) CONDICION -> IF PARENIZQ EXPRESION . PARENDER BLOQUE CONDICION2 SEMICOLON
+
+    PARENDER        shift and go to state 67
+
+
+state 44
+
+    (17) ESCRITURA -> PRINT PARENIZQ ESCRITURA2 . ESCRITURA3 PARENDER SEMICOLON
+    (20) ESCRITURA3 -> . COMMA ESCRITURA2 ESCRITURA3
+    (21) ESCRITURA3 -> . VACIO
+    (46) VACIO -> .
+
+    COMMA           shift and go to state 69
+    PARENDER        reduce using rule 46 (VACIO -> .)
+
+    ESCRITURA3                     shift and go to state 68
+    VACIO                          shift and go to state 70
+
+state 45
+
+    (18) ESCRITURA2 -> EXPRESION .
+
+    COMMA           reduce using rule 18 (ESCRITURA2 -> EXPRESION .)
+    PARENDER        reduce using rule 18 (ESCRITURA2 -> EXPRESION .)
+
+
+state 46
+
+    (19) ESCRITURA2 -> CTESTRING .
+
+    COMMA           reduce using rule 19 (ESCRITURA2 -> CTESTRING .)
+    PARENDER        reduce using rule 19 (ESCRITURA2 -> CTESTRING .)
+
+
+state 47
+
+    (5) VARS2 -> VARS3 COLON TIPO SEMICOLON .
+
+    BRACKETIZQ      reduce using rule 5 (VARS2 -> VARS3 COLON TIPO SEMICOLON .)
+    COLON           reduce using rule 5 (VARS2 -> VARS3 COLON TIPO SEMICOLON .)
+
+
+state 48
+
+    (16) ASIGNACION -> ID IGUAL EXPRESION SEMICOLON .
+
+    ID              reduce using rule 16 (ASIGNACION -> ID IGUAL EXPRESION SEMICOLON .)
+    IF              reduce using rule 16 (ASIGNACION -> ID IGUAL EXPRESION SEMICOLON .)
+    PRINT           reduce using rule 16 (ASIGNACION -> ID IGUAL EXPRESION SEMICOLON .)
+    BRACKETDER      reduce using rule 16 (ASIGNACION -> ID IGUAL EXPRESION SEMICOLON .)
+
+
+state 49
+
+    (22) EXPRESION -> EXP EXPRESION2 .
+
+    SEMICOLON       reduce using rule 22 (EXPRESION -> EXP EXPRESION2 .)
+    PARENDER        reduce using rule 22 (EXPRESION -> EXP EXPRESION2 .)
+    COMMA           reduce using rule 22 (EXPRESION -> EXP EXPRESION2 .)
+
+
+state 50
+
+    (23) EXPRESION2 -> MASQUE . EXP
+    (30) EXP -> . TERMINO EXP2
+    (34) TERMINO -> . FACTOR TERMINO2
+    (38) FACTOR -> . PARENIZQ EXPRESION PARENDER
+    (39) FACTOR -> . FACTOR2 VARCTE
+    (40) FACTOR2 -> . SIMMAS
+    (41) FACTOR2 -> . SIMMENOS
+    (42) FACTOR2 -> . VACIO
+    (46) VACIO -> .
+
+    PARENIZQ        shift and go to state 38
+    SIMMAS          shift and go to state 40
+    SIMMENOS        shift and go to state 41
+    ID              reduce using rule 46 (VACIO -> .)
+    CTEI            reduce using rule 46 (VACIO -> .)
+    CTEF            reduce using rule 46 (VACIO -> .)
+
+    EXP                            shift and go to state 71
+    TERMINO                        shift and go to state 36
+    FACTOR                         shift and go to state 37
+    FACTOR2                        shift and go to state 39
+    VACIO                          shift and go to state 42
+
+state 51
+
+    (24) EXPRESION2 -> MENOSQUE . EXP
+    (30) EXP -> . TERMINO EXP2
+    (34) TERMINO -> . FACTOR TERMINO2
+    (38) FACTOR -> . PARENIZQ EXPRESION PARENDER
+    (39) FACTOR -> . FACTOR2 VARCTE
+    (40) FACTOR2 -> . SIMMAS
+    (41) FACTOR2 -> . SIMMENOS
+    (42) FACTOR2 -> . VACIO
+    (46) VACIO -> .
+
+    PARENIZQ        shift and go to state 38
+    SIMMAS          shift and go to state 40
+    SIMMENOS        shift and go to state 41
+    ID              reduce using rule 46 (VACIO -> .)
+    CTEI            reduce using rule 46 (VACIO -> .)
+    CTEF            reduce using rule 46 (VACIO -> .)
+
+    EXP                            shift and go to state 72
+    TERMINO                        shift and go to state 36
+    FACTOR                         shift and go to state 37
+    FACTOR2                        shift and go to state 39
+    VACIO                          shift and go to state 42
+
+state 52
+
+    (25) EXPRESION2 -> NOIGUAL . EXP
+    (30) EXP -> . TERMINO EXP2
+    (34) TERMINO -> . FACTOR TERMINO2
+    (38) FACTOR -> . PARENIZQ EXPRESION PARENDER
+    (39) FACTOR -> . FACTOR2 VARCTE
+    (40) FACTOR2 -> . SIMMAS
+    (41) FACTOR2 -> . SIMMENOS
+    (42) FACTOR2 -> . VACIO
+    (46) VACIO -> .
+
+    PARENIZQ        shift and go to state 38
+    SIMMAS          shift and go to state 40
+    SIMMENOS        shift and go to state 41
+    ID              reduce using rule 46 (VACIO -> .)
+    CTEI            reduce using rule 46 (VACIO -> .)
+    CTEF            reduce using rule 46 (VACIO -> .)
+
+    EXP                            shift and go to state 73
+    TERMINO                        shift and go to state 36
+    FACTOR                         shift and go to state 37
+    FACTOR2                        shift and go to state 39
+    VACIO                          shift and go to state 42
+
+state 53
+
+    (26) EXPRESION2 -> VACIO .
+
+    SEMICOLON       reduce using rule 26 (EXPRESION2 -> VACIO .)
+    PARENDER        reduce using rule 26 (EXPRESION2 -> VACIO .)
+    COMMA           reduce using rule 26 (EXPRESION2 -> VACIO .)
+
+
+state 54
+
+    (30) EXP -> TERMINO EXP2 .
+
+    MASQUE          reduce using rule 30 (EXP -> TERMINO EXP2 .)
+    MENOSQUE        reduce using rule 30 (EXP -> TERMINO EXP2 .)
+    NOIGUAL         reduce using rule 30 (EXP -> TERMINO EXP2 .)
+    SEMICOLON       reduce using rule 30 (EXP -> TERMINO EXP2 .)
+    PARENDER        reduce using rule 30 (EXP -> TERMINO EXP2 .)
+    COMMA           reduce using rule 30 (EXP -> TERMINO EXP2 .)
+
+
+state 55
+
+    (31) EXP2 -> SIMMAS . TERMINO EXP2
+    (34) TERMINO -> . FACTOR TERMINO2
+    (38) FACTOR -> . PARENIZQ EXPRESION PARENDER
+    (39) FACTOR -> . FACTOR2 VARCTE
+    (40) FACTOR2 -> . SIMMAS
+    (41) FACTOR2 -> . SIMMENOS
+    (42) FACTOR2 -> . VACIO
+    (46) VACIO -> .
+
+    PARENIZQ        shift and go to state 38
+    SIMMAS          shift and go to state 40
+    SIMMENOS        shift and go to state 41
+    ID              reduce using rule 46 (VACIO -> .)
+    CTEI            reduce using rule 46 (VACIO -> .)
+    CTEF            reduce using rule 46 (VACIO -> .)
+
+    TERMINO                        shift and go to state 74
+    FACTOR                         shift and go to state 37
+    FACTOR2                        shift and go to state 39
+    VACIO                          shift and go to state 42
+
+state 56
+
+    (32) EXP2 -> SIMMENOS . TERMINO EXP2
+    (34) TERMINO -> . FACTOR TERMINO2
+    (38) FACTOR -> . PARENIZQ EXPRESION PARENDER
+    (39) FACTOR -> . FACTOR2 VARCTE
+    (40) FACTOR2 -> . SIMMAS
+    (41) FACTOR2 -> . SIMMENOS
+    (42) FACTOR2 -> . VACIO
+    (46) VACIO -> .
+
+    PARENIZQ        shift and go to state 38
+    SIMMAS          shift and go to state 40
+    SIMMENOS        shift and go to state 41
+    ID              reduce using rule 46 (VACIO -> .)
+    CTEI            reduce using rule 46 (VACIO -> .)
+    CTEF            reduce using rule 46 (VACIO -> .)
+
+    TERMINO                        shift and go to state 75
+    FACTOR                         shift and go to state 37
+    FACTOR2                        shift and go to state 39
+    VACIO                          shift and go to state 42
+
+state 57
+
+    (33) EXP2 -> VACIO .
+
+    MASQUE          reduce using rule 33 (EXP2 -> VACIO .)
+    MENOSQUE        reduce using rule 33 (EXP2 -> VACIO .)
+    NOIGUAL         reduce using rule 33 (EXP2 -> VACIO .)
+    SEMICOLON       reduce using rule 33 (EXP2 -> VACIO .)
+    PARENDER        reduce using rule 33 (EXP2 -> VACIO .)
+    COMMA           reduce using rule 33 (EXP2 -> VACIO .)
+
+
+state 58
+
+    (34) TERMINO -> FACTOR TERMINO2 .
+
+    SIMMAS          reduce using rule 34 (TERMINO -> FACTOR TERMINO2 .)
+    SIMMENOS        reduce using rule 34 (TERMINO -> FACTOR TERMINO2 .)
+    MASQUE          reduce using rule 34 (TERMINO -> FACTOR TERMINO2 .)
+    MENOSQUE        reduce using rule 34 (TERMINO -> FACTOR TERMINO2 .)
+    NOIGUAL         reduce using rule 34 (TERMINO -> FACTOR TERMINO2 .)
+    SEMICOLON       reduce using rule 34 (TERMINO -> FACTOR TERMINO2 .)
+    PARENDER        reduce using rule 34 (TERMINO -> FACTOR TERMINO2 .)
+    COMMA           reduce using rule 34 (TERMINO -> FACTOR TERMINO2 .)
+
+
+state 59
+
+    (35) TERMINO2 -> SIMMULT . FACTOR TERMINO2
+    (38) FACTOR -> . PARENIZQ EXPRESION PARENDER
+    (39) FACTOR -> . FACTOR2 VARCTE
+    (40) FACTOR2 -> . SIMMAS
+    (41) FACTOR2 -> . SIMMENOS
+    (42) FACTOR2 -> . VACIO
+    (46) VACIO -> .
+
+    PARENIZQ        shift and go to state 38
+    SIMMAS          shift and go to state 40
+    SIMMENOS        shift and go to state 41
+    ID              reduce using rule 46 (VACIO -> .)
+    CTEI            reduce using rule 46 (VACIO -> .)
+    CTEF            reduce using rule 46 (VACIO -> .)
+
+    FACTOR                         shift and go to state 76
+    FACTOR2                        shift and go to state 39
+    VACIO                          shift and go to state 42
+
+state 60
+
+    (36) TERMINO2 -> SIMDIV . FACTOR TERMINO2
+    (38) FACTOR -> . PARENIZQ EXPRESION PARENDER
+    (39) FACTOR -> . FACTOR2 VARCTE
+    (40) FACTOR2 -> . SIMMAS
+    (41) FACTOR2 -> . SIMMENOS
+    (42) FACTOR2 -> . VACIO
+    (46) VACIO -> .
+
+    PARENIZQ        shift and go to state 38
+    SIMMAS          shift and go to state 40
+    SIMMENOS        shift and go to state 41
+    ID              reduce using rule 46 (VACIO -> .)
+    CTEI            reduce using rule 46 (VACIO -> .)
+    CTEF            reduce using rule 46 (VACIO -> .)
+
+    FACTOR                         shift and go to state 77
+    FACTOR2                        shift and go to state 39
+    VACIO                          shift and go to state 42
+
+state 61
+
+    (37) TERMINO2 -> VACIO .
+
+    SIMMAS          reduce using rule 37 (TERMINO2 -> VACIO .)
+    SIMMENOS        reduce using rule 37 (TERMINO2 -> VACIO .)
+    MASQUE          reduce using rule 37 (TERMINO2 -> VACIO .)
+    MENOSQUE        reduce using rule 37 (TERMINO2 -> VACIO .)
+    NOIGUAL         reduce using rule 37 (TERMINO2 -> VACIO .)
+    SEMICOLON       reduce using rule 37 (TERMINO2 -> VACIO .)
+    PARENDER        reduce using rule 37 (TERMINO2 -> VACIO .)
+    COMMA           reduce using rule 37 (TERMINO2 -> VACIO .)
+
+
+state 62
+
+    (38) FACTOR -> PARENIZQ EXPRESION . PARENDER
+
+    PARENDER        shift and go to state 78
+
+
+state 63
+
+    (39) FACTOR -> FACTOR2 VARCTE .
+
+    SIMMULT         reduce using rule 39 (FACTOR -> FACTOR2 VARCTE .)
+    SIMDIV          reduce using rule 39 (FACTOR -> FACTOR2 VARCTE .)
+    SIMMAS          reduce using rule 39 (FACTOR -> FACTOR2 VARCTE .)
+    SIMMENOS        reduce using rule 39 (FACTOR -> FACTOR2 VARCTE .)
+    MASQUE          reduce using rule 39 (FACTOR -> FACTOR2 VARCTE .)
+    MENOSQUE        reduce using rule 39 (FACTOR -> FACTOR2 VARCTE .)
+    NOIGUAL         reduce using rule 39 (FACTOR -> FACTOR2 VARCTE .)
+    SEMICOLON       reduce using rule 39 (FACTOR -> FACTOR2 VARCTE .)
+    PARENDER        reduce using rule 39 (FACTOR -> FACTOR2 VARCTE .)
+    COMMA           reduce using rule 39 (FACTOR -> FACTOR2 VARCTE .)
+
+
+state 64
+
+    (43) VARCTE -> ID .
+
+    SIMMULT         reduce using rule 43 (VARCTE -> ID .)
+    SIMDIV          reduce using rule 43 (VARCTE -> ID .)
+    SIMMAS          reduce using rule 43 (VARCTE -> ID .)
+    SIMMENOS        reduce using rule 43 (VARCTE -> ID .)
+    MASQUE          reduce using rule 43 (VARCTE -> ID .)
+    MENOSQUE        reduce using rule 43 (VARCTE -> ID .)
+    NOIGUAL         reduce using rule 43 (VARCTE -> ID .)
+    SEMICOLON       reduce using rule 43 (VARCTE -> ID .)
+    PARENDER        reduce using rule 43 (VARCTE -> ID .)
+    COMMA           reduce using rule 43 (VARCTE -> ID .)
+
+
+state 65
+
+    (44) VARCTE -> CTEI .
+
+    SIMMULT         reduce using rule 44 (VARCTE -> CTEI .)
+    SIMDIV          reduce using rule 44 (VARCTE -> CTEI .)
+    SIMMAS          reduce using rule 44 (VARCTE -> CTEI .)
+    SIMMENOS        reduce using rule 44 (VARCTE -> CTEI .)
+    MASQUE          reduce using rule 44 (VARCTE -> CTEI .)
+    MENOSQUE        reduce using rule 44 (VARCTE -> CTEI .)
+    NOIGUAL         reduce using rule 44 (VARCTE -> CTEI .)
+    SEMICOLON       reduce using rule 44 (VARCTE -> CTEI .)
+    PARENDER        reduce using rule 44 (VARCTE -> CTEI .)
+    COMMA           reduce using rule 44 (VARCTE -> CTEI .)
+
+
+state 66
+
+    (45) VARCTE -> CTEF .
+
+    SIMMULT         reduce using rule 45 (VARCTE -> CTEF .)
+    SIMDIV          reduce using rule 45 (VARCTE -> CTEF .)
+    SIMMAS          reduce using rule 45 (VARCTE -> CTEF .)
+    SIMMENOS        reduce using rule 45 (VARCTE -> CTEF .)
+    MASQUE          reduce using rule 45 (VARCTE -> CTEF .)
+    MENOSQUE        reduce using rule 45 (VARCTE -> CTEF .)
+    NOIGUAL         reduce using rule 45 (VARCTE -> CTEF .)
+    SEMICOLON       reduce using rule 45 (VARCTE -> CTEF .)
+    PARENDER        reduce using rule 45 (VARCTE -> CTEF .)
+    COMMA           reduce using rule 45 (VARCTE -> CTEF .)
+
+
+state 67
+
+    (27) CONDICION -> IF PARENIZQ EXPRESION PARENDER . BLOQUE CONDICION2 SEMICOLON
+    (10) BLOQUE -> . BRACKETIZQ ESTATUTO BRACKETDER
+
+    BRACKETIZQ      shift and go to state 10
+
+    BLOQUE                         shift and go to state 79
+
+state 68
+
+    (17) ESCRITURA -> PRINT PARENIZQ ESCRITURA2 ESCRITURA3 . PARENDER SEMICOLON
+
+    PARENDER        shift and go to state 80
+
+
+state 69
+
+    (20) ESCRITURA3 -> COMMA . ESCRITURA2 ESCRITURA3
+    (18) ESCRITURA2 -> . EXPRESION
+    (19) ESCRITURA2 -> . CTESTRING
+    (22) EXPRESION -> . EXP EXPRESION2
+    (30) EXP -> . TERMINO EXP2
+    (34) TERMINO -> . FACTOR TERMINO2
+    (38) FACTOR -> . PARENIZQ EXPRESION PARENDER
+    (39) FACTOR -> . FACTOR2 VARCTE
+    (40) FACTOR2 -> . SIMMAS
+    (41) FACTOR2 -> . SIMMENOS
+    (42) FACTOR2 -> . VACIO
+    (46) VACIO -> .
+
+    CTESTRING       shift and go to state 46
+    PARENIZQ        shift and go to state 38
+    SIMMAS          shift and go to state 40
+    SIMMENOS        shift and go to state 41
+    ID              reduce using rule 46 (VACIO -> .)
+    CTEI            reduce using rule 46 (VACIO -> .)
+    CTEF            reduce using rule 46 (VACIO -> .)
+
+    ESCRITURA2                     shift and go to state 81
+    EXPRESION                      shift and go to state 45
+    EXP                            shift and go to state 35
+    TERMINO                        shift and go to state 36
+    FACTOR                         shift and go to state 37
+    FACTOR2                        shift and go to state 39
+    VACIO                          shift and go to state 42
+
+state 70
+
+    (21) ESCRITURA3 -> VACIO .
+
+    PARENDER        reduce using rule 21 (ESCRITURA3 -> VACIO .)
+
+
+state 71
+
+    (23) EXPRESION2 -> MASQUE EXP .
+
+    SEMICOLON       reduce using rule 23 (EXPRESION2 -> MASQUE EXP .)
+    PARENDER        reduce using rule 23 (EXPRESION2 -> MASQUE EXP .)
+    COMMA           reduce using rule 23 (EXPRESION2 -> MASQUE EXP .)
+
+
+state 72
+
+    (24) EXPRESION2 -> MENOSQUE EXP .
+
+    SEMICOLON       reduce using rule 24 (EXPRESION2 -> MENOSQUE EXP .)
+    PARENDER        reduce using rule 24 (EXPRESION2 -> MENOSQUE EXP .)
+    COMMA           reduce using rule 24 (EXPRESION2 -> MENOSQUE EXP .)
+
+
+state 73
+
+    (25) EXPRESION2 -> NOIGUAL EXP .
+
+    SEMICOLON       reduce using rule 25 (EXPRESION2 -> NOIGUAL EXP .)
+    PARENDER        reduce using rule 25 (EXPRESION2 -> NOIGUAL EXP .)
+    COMMA           reduce using rule 25 (EXPRESION2 -> NOIGUAL EXP .)
+
+
+state 74
+
+    (31) EXP2 -> SIMMAS TERMINO . EXP2
+    (31) EXP2 -> . SIMMAS TERMINO EXP2
+    (32) EXP2 -> . SIMMENOS TERMINO EXP2
+    (33) EXP2 -> . VACIO
+    (46) VACIO -> .
+
+    SIMMAS          shift and go to state 55
+    SIMMENOS        shift and go to state 56
+    MASQUE          reduce using rule 46 (VACIO -> .)
+    MENOSQUE        reduce using rule 46 (VACIO -> .)
+    NOIGUAL         reduce using rule 46 (VACIO -> .)
+    SEMICOLON       reduce using rule 46 (VACIO -> .)
+    PARENDER        reduce using rule 46 (VACIO -> .)
+    COMMA           reduce using rule 46 (VACIO -> .)
+
+    EXP2                           shift and go to state 82
+    VACIO                          shift and go to state 57
+
+state 75
+
+    (32) EXP2 -> SIMMENOS TERMINO . EXP2
+    (31) EXP2 -> . SIMMAS TERMINO EXP2
+    (32) EXP2 -> . SIMMENOS TERMINO EXP2
+    (33) EXP2 -> . VACIO
+    (46) VACIO -> .
+
+    SIMMAS          shift and go to state 55
+    SIMMENOS        shift and go to state 56
+    MASQUE          reduce using rule 46 (VACIO -> .)
+    MENOSQUE        reduce using rule 46 (VACIO -> .)
+    NOIGUAL         reduce using rule 46 (VACIO -> .)
+    SEMICOLON       reduce using rule 46 (VACIO -> .)
+    PARENDER        reduce using rule 46 (VACIO -> .)
+    COMMA           reduce using rule 46 (VACIO -> .)
+
+    EXP2                           shift and go to state 83
+    VACIO                          shift and go to state 57
+
+state 76
+
+    (35) TERMINO2 -> SIMMULT FACTOR . TERMINO2
+    (35) TERMINO2 -> . SIMMULT FACTOR TERMINO2
+    (36) TERMINO2 -> . SIMDIV FACTOR TERMINO2
+    (37) TERMINO2 -> . VACIO
+    (46) VACIO -> .
+
+    SIMMULT         shift and go to state 59
+    SIMDIV          shift and go to state 60
+    SIMMAS          reduce using rule 46 (VACIO -> .)
+    SIMMENOS        reduce using rule 46 (VACIO -> .)
+    MASQUE          reduce using rule 46 (VACIO -> .)
+    MENOSQUE        reduce using rule 46 (VACIO -> .)
+    NOIGUAL         reduce using rule 46 (VACIO -> .)
+    SEMICOLON       reduce using rule 46 (VACIO -> .)
+    PARENDER        reduce using rule 46 (VACIO -> .)
+    COMMA           reduce using rule 46 (VACIO -> .)
+
+    TERMINO2                       shift and go to state 84
+    VACIO                          shift and go to state 61
+
+state 77
+
+    (36) TERMINO2 -> SIMDIV FACTOR . TERMINO2
+    (35) TERMINO2 -> . SIMMULT FACTOR TERMINO2
+    (36) TERMINO2 -> . SIMDIV FACTOR TERMINO2
+    (37) TERMINO2 -> . VACIO
+    (46) VACIO -> .
+
+    SIMMULT         shift and go to state 59
+    SIMDIV          shift and go to state 60
+    SIMMAS          reduce using rule 46 (VACIO -> .)
+    SIMMENOS        reduce using rule 46 (VACIO -> .)
+    MASQUE          reduce using rule 46 (VACIO -> .)
+    MENOSQUE        reduce using rule 46 (VACIO -> .)
+    NOIGUAL         reduce using rule 46 (VACIO -> .)
+    SEMICOLON       reduce using rule 46 (VACIO -> .)
+    PARENDER        reduce using rule 46 (VACIO -> .)
+    COMMA           reduce using rule 46 (VACIO -> .)
+
+    TERMINO2                       shift and go to state 85
+    VACIO                          shift and go to state 61
+
+state 78
+
+    (38) FACTOR -> PARENIZQ EXPRESION PARENDER .
+
+    SIMMULT         reduce using rule 38 (FACTOR -> PARENIZQ EXPRESION PARENDER .)
+    SIMDIV          reduce using rule 38 (FACTOR -> PARENIZQ EXPRESION PARENDER .)
+    SIMMAS          reduce using rule 38 (FACTOR -> PARENIZQ EXPRESION PARENDER .)
+    SIMMENOS        reduce using rule 38 (FACTOR -> PARENIZQ EXPRESION PARENDER .)
+    MASQUE          reduce using rule 38 (FACTOR -> PARENIZQ EXPRESION PARENDER .)
+    MENOSQUE        reduce using rule 38 (FACTOR -> PARENIZQ EXPRESION PARENDER .)
+    NOIGUAL         reduce using rule 38 (FACTOR -> PARENIZQ EXPRESION PARENDER .)
+    SEMICOLON       reduce using rule 38 (FACTOR -> PARENIZQ EXPRESION PARENDER .)
+    PARENDER        reduce using rule 38 (FACTOR -> PARENIZQ EXPRESION PARENDER .)
+    COMMA           reduce using rule 38 (FACTOR -> PARENIZQ EXPRESION PARENDER .)
+
+
+state 79
+
+    (27) CONDICION -> IF PARENIZQ EXPRESION PARENDER BLOQUE . CONDICION2 SEMICOLON
+    (28) CONDICION2 -> . ELSE BLOQUE
+    (29) CONDICION2 -> . VACIO
+    (46) VACIO -> .
+
+    ELSE            shift and go to state 87
+    SEMICOLON       reduce using rule 46 (VACIO -> .)
+
+    CONDICION2                     shift and go to state 86
+    VACIO                          shift and go to state 88
+
+state 80
+
+    (17) ESCRITURA -> PRINT PARENIZQ ESCRITURA2 ESCRITURA3 PARENDER . SEMICOLON
+
+    SEMICOLON       shift and go to state 89
+
+
+state 81
+
+    (20) ESCRITURA3 -> COMMA ESCRITURA2 . ESCRITURA3
+    (20) ESCRITURA3 -> . COMMA ESCRITURA2 ESCRITURA3
+    (21) ESCRITURA3 -> . VACIO
+    (46) VACIO -> .
+
+    COMMA           shift and go to state 69
+    PARENDER        reduce using rule 46 (VACIO -> .)
+
+    ESCRITURA3                     shift and go to state 90
+    VACIO                          shift and go to state 70
+
+state 82
+
+    (31) EXP2 -> SIMMAS TERMINO EXP2 .
+
+    MASQUE          reduce using rule 31 (EXP2 -> SIMMAS TERMINO EXP2 .)
+    MENOSQUE        reduce using rule 31 (EXP2 -> SIMMAS TERMINO EXP2 .)
+    NOIGUAL         reduce using rule 31 (EXP2 -> SIMMAS TERMINO EXP2 .)
+    SEMICOLON       reduce using rule 31 (EXP2 -> SIMMAS TERMINO EXP2 .)
+    PARENDER        reduce using rule 31 (EXP2 -> SIMMAS TERMINO EXP2 .)
+    COMMA           reduce using rule 31 (EXP2 -> SIMMAS TERMINO EXP2 .)
+
+
+state 83
+
+    (32) EXP2 -> SIMMENOS TERMINO EXP2 .
+
+    MASQUE          reduce using rule 32 (EXP2 -> SIMMENOS TERMINO EXP2 .)
+    MENOSQUE        reduce using rule 32 (EXP2 -> SIMMENOS TERMINO EXP2 .)
+    NOIGUAL         reduce using rule 32 (EXP2 -> SIMMENOS TERMINO EXP2 .)
+    SEMICOLON       reduce using rule 32 (EXP2 -> SIMMENOS TERMINO EXP2 .)
+    PARENDER        reduce using rule 32 (EXP2 -> SIMMENOS TERMINO EXP2 .)
+    COMMA           reduce using rule 32 (EXP2 -> SIMMENOS TERMINO EXP2 .)
+
+
+state 84
+
+    (35) TERMINO2 -> SIMMULT FACTOR TERMINO2 .
+
+    SIMMAS          reduce using rule 35 (TERMINO2 -> SIMMULT FACTOR TERMINO2 .)
+    SIMMENOS        reduce using rule 35 (TERMINO2 -> SIMMULT FACTOR TERMINO2 .)
+    MASQUE          reduce using rule 35 (TERMINO2 -> SIMMULT FACTOR TERMINO2 .)
+    MENOSQUE        reduce using rule 35 (TERMINO2 -> SIMMULT FACTOR TERMINO2 .)
+    NOIGUAL         reduce using rule 35 (TERMINO2 -> SIMMULT FACTOR TERMINO2 .)
+    SEMICOLON       reduce using rule 35 (TERMINO2 -> SIMMULT FACTOR TERMINO2 .)
+    PARENDER        reduce using rule 35 (TERMINO2 -> SIMMULT FACTOR TERMINO2 .)
+    COMMA           reduce using rule 35 (TERMINO2 -> SIMMULT FACTOR TERMINO2 .)
+
+
+state 85
+
+    (36) TERMINO2 -> SIMDIV FACTOR TERMINO2 .
+
+    SIMMAS          reduce using rule 36 (TERMINO2 -> SIMDIV FACTOR TERMINO2 .)
+    SIMMENOS        reduce using rule 36 (TERMINO2 -> SIMDIV FACTOR TERMINO2 .)
+    MASQUE          reduce using rule 36 (TERMINO2 -> SIMDIV FACTOR TERMINO2 .)
+    MENOSQUE        reduce using rule 36 (TERMINO2 -> SIMDIV FACTOR TERMINO2 .)
+    NOIGUAL         reduce using rule 36 (TERMINO2 -> SIMDIV FACTOR TERMINO2 .)
+    SEMICOLON       reduce using rule 36 (TERMINO2 -> SIMDIV FACTOR TERMINO2 .)
+    PARENDER        reduce using rule 36 (TERMINO2 -> SIMDIV FACTOR TERMINO2 .)
+    COMMA           reduce using rule 36 (TERMINO2 -> SIMDIV FACTOR TERMINO2 .)
+
+
+state 86
+
+    (27) CONDICION -> IF PARENIZQ EXPRESION PARENDER BLOQUE CONDICION2 . SEMICOLON
+
+    SEMICOLON       shift and go to state 91
+
+
+state 87
+
+    (28) CONDICION2 -> ELSE . BLOQUE
+    (10) BLOQUE -> . BRACKETIZQ ESTATUTO BRACKETDER
+
+    BRACKETIZQ      shift and go to state 10
+
+    BLOQUE                         shift and go to state 92
+
+state 88
+
+    (29) CONDICION2 -> VACIO .
+
+    SEMICOLON       reduce using rule 29 (CONDICION2 -> VACIO .)
+
+
+state 89
+
+    (17) ESCRITURA -> PRINT PARENIZQ ESCRITURA2 ESCRITURA3 PARENDER SEMICOLON .
+
+    ID              reduce using rule 17 (ESCRITURA -> PRINT PARENIZQ ESCRITURA2 ESCRITURA3 PARENDER SEMICOLON .)
+    IF              reduce using rule 17 (ESCRITURA -> PRINT PARENIZQ ESCRITURA2 ESCRITURA3 PARENDER SEMICOLON .)
+    PRINT           reduce using rule 17 (ESCRITURA -> PRINT PARENIZQ ESCRITURA2 ESCRITURA3 PARENDER SEMICOLON .)
+    BRACKETDER      reduce using rule 17 (ESCRITURA -> PRINT PARENIZQ ESCRITURA2 ESCRITURA3 PARENDER SEMICOLON .)
+
+
+state 90
+
+    (20) ESCRITURA3 -> COMMA ESCRITURA2 ESCRITURA3 .
+
+    PARENDER        reduce using rule 20 (ESCRITURA3 -> COMMA ESCRITURA2 ESCRITURA3 .)
+
+
+state 91
+
+    (27) CONDICION -> IF PARENIZQ EXPRESION PARENDER BLOQUE CONDICION2 SEMICOLON .
+
+    ID              reduce using rule 27 (CONDICION -> IF PARENIZQ EXPRESION PARENDER BLOQUE CONDICION2 SEMICOLON .)
+    IF              reduce using rule 27 (CONDICION -> IF PARENIZQ EXPRESION PARENDER BLOQUE CONDICION2 SEMICOLON .)
+    PRINT           reduce using rule 27 (CONDICION -> IF PARENIZQ EXPRESION PARENDER BLOQUE CONDICION2 SEMICOLON .)
+    BRACKETDER      reduce using rule 27 (CONDICION -> IF PARENIZQ EXPRESION PARENDER BLOQUE CONDICION2 SEMICOLON .)
+
+
+state 92
+
+    (28) CONDICION2 -> ELSE BLOQUE .
+
+    SEMICOLON       reduce using rule 28 (CONDICION2 -> ELSE BLOQUE .)
+
